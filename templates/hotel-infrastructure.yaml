@@ -1,0 +1,384 @@
+# Template: Infraestructura Tecnológica Hotel
+# Generado por NubemClaude Framework v2.0
+
+project:
+  name: "Hotel [NOMBRE]"
+  type: hospitality
+  location: "[CIUDAD, PAÍS]"
+  size:
+    floors: 10
+    rooms: 200
+    public_areas: 15
+    staff_areas: 10
+  
+infrastructure:
+  # CABLEADO ESTRUCTURADO
+  structured_cabling:
+    backbone:
+      type: "Fibra OM4 multimodo"
+      cores: 12
+      redundancy: true
+    
+    horizontal:
+      type: "Cat6A F/UTP"
+      points_per_room: 3
+      public_points: 150
+      office_points: 50
+      certification: "Fluke DSX-8000"
+    
+    racks:
+      main:
+        location: "RITI - Planta -1"
+        size: "42U"
+        cooling: "Forzado 4 ventiladores"
+        ups: "5KVA online"
+      
+      floor:
+        size: "24U"
+        quantity: 10
+        ups: "2KVA por rack"
+  
+  # TELECOMUNICACIONES
+  telecommunications:
+    main_connection:
+      provider: "[OPERADOR PRINCIPAL]"
+      type: "Fibra dedicada simétrica"
+      bandwidth: "1Gbps"
+      sla: "99.9%"
+    
+    backup_connection:
+      provider: "[OPERADOR BACKUP]"
+      type: "Fibra o radio enlace"
+      bandwidth: "500Mbps"
+      failover: "Automático <3seg"
+    
+    ict_compliance:
+      riti:
+        location: "Planta -1"
+        size: "3x2m"
+        access: "24/7 restringido"
+        climate: "A/C redundante"
+      
+      rits:
+        location: "Azotea"
+        antennas: ["TV/SAT", "4G/5G", "Radio"]
+        waterproofing: "IP65"
+  
+  # NETWORKING
+  network:
+    architecture: "3-tier collapsed core"
+    
+    core_layer:
+      switches: "2x Cisco Catalyst 9500"
+      redundancy: "Stack + HSRP"
+      uplinks: "40G entre core"
+    
+    distribution_layer:
+      switches: "11x Cisco Catalyst 9300"
+      uplinks: "2x10G al core"
+      features: ["PoE+", "Layer 3", "QoS"]
+    
+    access_layer:
+      switches: "44x Cisco Catalyst 9200"
+      ports: "48 puertos PoE+"
+      power_budget: "740W por switch"
+    
+    wifi:
+      standard: "WiFi 6E (802.11ax)"
+      aps: "250x Cisco 9130AXE"
+      controller: "2x Cisco 9800-CL (HA)"
+      coverage: "100% -65dBm mínimo"
+      
+      ssids:
+        - name: "Hotel_Guests"
+          vlan: 10
+          auth: "Portal cautivo"
+          bandwidth: "25Mbps por device"
+        
+        - name: "Hotel_Staff"
+          vlan: 20
+          auth: "WPA3-Enterprise"
+          
+        - name: "Hotel_IoT"
+          vlan: 30
+          auth: "PSK + MAC filtering"
+          
+        - name: "Hotel_Conference"
+          vlan: 40
+          auth: "Temporal + voucher"
+    
+    vlans:
+      - id: 10
+        name: "Guests"
+        subnet: "10.10.0.0/20"
+        
+      - id: 20
+        name: "Staff"
+        subnet: "10.20.0.0/24"
+        
+      - id: 30
+        name: "IoT"
+        subnet: "10.30.0.0/24"
+        
+      - id: 40
+        name: "Conference"
+        subnet: "10.40.0.0/24"
+        
+      - id: 50
+        name: "Security"
+        subnet: "10.50.0.0/24"
+        
+      - id: 60
+        name: "Management"
+        subnet: "10.60.0.0/24"
+  
+  # SISTEMAS ESPECIALIZADOS
+  specialized_systems:
+    pms:
+      software: "Opera Cloud / Mews / Cloudbeds"
+      servers: "Cloud SaaS"
+      workstations: 15
+      integrations:
+        - "Channel Manager"
+        - "Revenue Management"
+        - "CRM"
+        - "Accounting"
+    
+    door_locks:
+      system: "Onity DirectKey / Salto"
+      type: "RFID Mifare DESFire EV2"
+      doors: 230
+      online: true
+      battery_life: "2 años"
+      integration: "PMS bidireccional"
+    
+    pos:
+      system: "Micros Simphony / Square"
+      terminals:
+        restaurant: 5
+        bar: 3
+        room_service: 2
+        spa: 2
+        gift_shop: 1
+      
+      payment_gateway:
+        primary: "Redsys/Stripe"
+        methods: ["Chip&PIN", "Contactless", "Mobile"]
+        pci_compliance: "Level 1"
+    
+    bms:
+      platform: "Schneider EcoStruxure / Siemens Desigo"
+      
+      subsystems:
+        hvac:
+          zones: 250
+          control: "Por habitación + áreas comunes"
+          integration: "PMS check-in/out"
+        
+        lighting:
+          protocol: "DALI/KNX"
+          scenes: "Personalizables"
+          sensors: "Presencia + luminosidad"
+        
+        energy:
+          meters: "Por planta + críticos"
+          monitoring: "Tiempo real"
+          reporting: "Dashboard + alertas"
+        
+        water:
+          leak_detection: true
+          consumption_monitoring: true
+          hot_water_control: true
+    
+    cctv:
+      cameras:
+        total: 150
+        types:
+          dome_4k: 100
+          ptz: 20
+          360_degree: 10
+          anpr: 10
+          thermal: 10
+      
+      nvr:
+        system: "Milestone XProtect / Genetec"
+        servers: "2x redundantes"
+        storage: "200TB RAID6"
+        retention: "30 días mínimo"
+      
+      analytics:
+        - "Detección facial"
+        - "Contador personas"
+        - "Detección objetos abandonados"
+        - "Mapas de calor"
+        - "Búsqueda forense"
+      
+      gdpr_compliance:
+        - "Máscaras privacidad"
+        - "Logs auditoría"
+        - "Acceso controlado"
+        - "Derecho al olvido"
+    
+    access_control:
+      readers: 85
+      technology: "RFID + PIN + Biométrico"
+      
+      zones:
+        - "Áreas staff"
+        - "Oficinas"
+        - "Almacenes"
+        - "Parking staff"
+        - "Azotea/técnicas"
+        - "Data center"
+      
+      integration:
+        - "PMS (huéspedes VIP)"
+        - "RRHH (empleados)"
+        - "BMS (horarios)"
+        - "CCTV (eventos)"
+    
+    audio_video:
+      public_address:
+        zones: 20
+        amplifiers: "Clase D redundantes"
+        speakers: "Certificados EN 54-24"
+        integration: "Emergencias + música"
+      
+      background_music:
+        service: "Spotify Business / Mood Media"
+        zones_independientes: 15
+        scheduling: "Por horario/evento"
+      
+      conference_av:
+        rooms: 5
+        equipment:
+          - "Proyectores 4K láser"
+          - "Pantallas LED"
+          - "Sistemas conferencia"
+          - "Streaming capability"
+    
+    iptv:
+      headend: "VBox / Nonius"
+      channels: "100+ HD/4K"
+      vod: "Netflix/Prime integrado"
+      
+      features:
+        - "Chromecast built-in"
+        - "Welcome message"
+        - "Room service"
+        - "Información hotel"
+        - "Checkout express"
+    
+    telephony:
+      pbx: "3CX Cloud / Cisco"
+      extensions: 300
+      lines: "30 SIP trunk"
+      
+      features:
+        - "Voicemail to email"
+        - "Call recording"
+        - "IVR multiidioma"
+        - "CTI con PMS"
+        - "Móvil integration"
+    
+    guest_wifi_portal:
+      authentication:
+        - "Código habitación"
+        - "Redes sociales"
+        - "Email/SMS"
+        - "Voucher"
+      
+      features:
+        - "Multiidioma"
+        - "Términos y condiciones"
+        - "Límite dispositivos"
+        - "Bandwidth management"
+        - "Publicidad/ofertas"
+
+# DOCUMENTACIÓN REQUERIDA
+documentation:
+  technical:
+    - "Memoria técnica descriptiva"
+    - "Planos AutoCAD (planta, esquemas)"
+    - "Diagramas de red (lógico y físico)"
+    - "Matriz de cableado"
+    - "Certificaciones de cableado"
+  
+  compliance:
+    - "Proyecto ICT visado"
+    - "Boletín instalación telecomunicaciones"
+    - "Certificado GDPR para CCTV"
+    - "Auditoría PCI-DSS para pagos"
+    - "Licencias software"
+  
+  operational:
+    - "Manual de operación"
+    - "Procedimientos mantenimiento"
+    - "Plan de contingencia"
+    - "Contactos soporte 24/7"
+    - "Passwords vault"
+
+# PRESUPUESTO ESTIMADO
+budget_estimate:
+  infrastructure:
+    cabling: "€150,000"
+    networking: "€200,000"
+    wifi: "€120,000"
+  
+  systems:
+    pms: "€50,000 + €2,000/mes"
+    door_locks: "€180,000"
+    pos: "€30,000"
+    bms: "€150,000"
+    cctv: "€100,000"
+    access_control: "€60,000"
+    av_systems: "€80,000"
+    iptv: "€60,000"
+    telephony: "€20,000"
+  
+  services:
+    installation: "€200,000"
+    configuration: "€50,000"
+    training: "€10,000"
+    documentation: "€15,000"
+  
+  total_estimated: "€1,475,000"
+  contingency: "10%"
+  
+# TIMELINE
+timeline:
+  phase1_infrastructure: "8 semanas"
+  phase2_systems: "6 semanas"
+  phase3_integration: "4 semanas"
+  phase4_testing: "2 semanas"
+  phase5_training: "1 semana"
+  total: "21 semanas"
+
+# MANTENIMIENTO
+maintenance:
+  sla:
+    critical: "2 horas"
+    high: "4 horas"
+    medium: "8 horas"
+    low: "24 horas"
+  
+  preventive:
+    frequency: "Trimestral"
+    includes:
+      - "Limpieza equipos"
+      - "Actualización firmware"
+      - "Test backups"
+      - "Revisión logs"
+  
+  support:
+    level1: "Help desk 24/7"
+    level2: "Soporte remoto"
+    level3: "Soporte en sitio"
+    
+# NOTAS
+notes:
+  - "Adaptar según normativa local"
+  - "Verificar disponibilidad productos en región"
+  - "Considerar futuras expansiones"
+  - "Incluir formación personal hotel"
+  - "Planificar ventanas mantenimiento"

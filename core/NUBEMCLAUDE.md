@@ -5,15 +5,16 @@ Combina lo mejor de 35+ frameworks analizados con innovaciones únicas.
 
 ## Sistema de Carga Modular v2.0
 
-@PRINCIPLES.md    # Principios fundamentales
-@COMMANDS.md      # 30+ comandos con IA predictiva
-@PERSONAS.md      # 15 personas especializadas
-@SECURITY.md      # Security Engine proactivo
-@MCP.md          # Protocol universal para LLMs
-@RAG.md          # Sistema RAG empresarial
-@RULES.md        # Reglas universales multi-IDE
-@ORCHESTRATOR.md # Coordinación multi-agente
-@MODES.md        # Modos de operación
+@PRINCIPLES.md        # Principios fundamentales
+@COMMANDS.md          # 30+ comandos con IA predictiva
+@PERSONAS.md          # 16 personas especializadas (incluye infrastructure-engineer)
+@SECURITY.md          # Security Engine proactivo
+@MCP.md              # Protocol universal para LLMs
+@RAG.md              # Sistema RAG empresarial
+@RULES.md            # Reglas universales multi-IDE
+@ORCHESTRATOR.md     # Coordinación multi-agente
+@MODES.md            # Modos de operación
+@INFRASTRUCTURE.md   # Ingeniería de infraestructuras tecnológicas
 
 ## Configuración Activa v2.0
 
