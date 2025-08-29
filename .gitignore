@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# RAG Data (sensitive)
+rag/data/
+rag/embeddings/
+rag/cache/
+
+# User configs
+config/user/
+config/local/
+
+# Backups
+*.backup
+*.bak
+backups/
+
+# Temp
+tmp/
+temp/
+.tmp/
+
+# Testing
+coverage/
+.coverage
+.pytest_cache/
+.tox/
+
+# Documentation build
+docs/_build/
+docs/.doctrees/
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.crt
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Claude specific
+.claude-cache/
+.claude-sessions/
+
+# GCP
+*.json
+!package.json
+!tsconfig.json
+!config/*.json
+service-account-*.json
