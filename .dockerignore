@@ -1,0 +1,72 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+*.cover
+*.log
+.pytest_cache
+.mypy_cache
+.hypothesis
+
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Documentation
+docs/_build/
+site/
+
+# Tests
+htmlcov/
+.nox/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+*.crt
+
+# Data
+*.db
+*.sqlite
+*.sqlite3
+data/
+notebooks/*.ipynb_checkpoints
+
+# Docker
+docker-compose.override.yml
+Dockerfile.local

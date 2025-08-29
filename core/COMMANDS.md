@@ -60,6 +60,29 @@ command_structure:
 - **RAG**: Adapta explicación a nivel de conocimiento del usuario
 - **Flags**: `--level [beginner|intermediate|expert]`, `--examples`
 
+## Comandos de Análisis Predictivo
+
+### `/nc:predict [target] [flags]`
+**Propósito**: Predicción de issues antes de que ocurran
+- **Auto-Persona**: Analyzer, Security, Performance
+- **ML Engine**: Modelo predictivo entrenado
+- **Outputs**: Issues potenciales, probabilidad, prevención
+- **Flags**: `--confidence [0-1]`, `--category [bugs|security|performance]`
+
+### `/nc:forecast [metric] [flags]`
+**Propósito**: Proyección de métricas futuras
+- **Auto-Persona**: Performance, Data-analyst
+- **RAG**: Histórico de métricas similares
+- **Outputs**: Proyecciones, tendencias, alertas
+- **Flags**: `--period [days]`, `--model [linear|ml]`
+
+### `/nc:estimate-complexity [target]`
+**Propósito**: Estimación precisa de complejidad
+- **Auto-Persona**: Architect, Analyzer
+- **Analysis**: Ciclomática, cognitiva, dependencies
+- **Outputs**: Score, breakdown, recommendations
+- **Flags**: `--include-debt`, `--future-proof`
+
 ## Comandos de Calidad
 
 ### `/nc:improve [target] [flags]`
@@ -75,6 +98,20 @@ command_structure:
 - **RAG**: Usa base de vulnerabilidades conocidas
 - **MCP**: Sequential (threat modeling)
 - **Flags**: `--audit`, `--fix`, `--compliance [OWASP|PCI|GDPR]`
+
+### `/nc:security-scan [target] [flags]`
+**Propósito**: Escaneo profundo con Security Engine
+- **Auto-Persona**: Security
+- **Engine**: SAST + dependency check + secrets scan
+- **Auto-fix**: Corrige issues automáticamente
+- **Flags**: `--deep`, `--fix`, `--block-critical`
+
+### `/nc:review [target] [flags]`
+**Propósito**: Code review multi-agente (de CCPlugins)
+- **Auto-Persona**: Multiple (Security, Performance, Quality)
+- **Approach**: Múltiples perspectivas simultáneas
+- **Outputs**: Issues, suggestions, approval score
+- **Flags**: `--strict`, `--focus [area]`, `--pr`
 
 ### `/nc:test [type] [flags]`
 **Propósito**: Testing inteligente con coverage óptimo
@@ -124,6 +161,45 @@ command_structure:
 - **RAG**: Usa configuraciones de deploy exitosas
 - **Wave**: Deploy multi-etapa con validación
 - **Flags**: `--env`, `--strategy [blue-green|canary|rolling]`, `--dry-run`
+
+## Comandos Multi-Agente
+
+### `/nc:orchestrate [workflow] [flags]`
+**Propósito**: Orquestación de múltiples agentes
+- **Coordination**: Local + cloud agents
+- **Load balancing**: Distribución inteligente
+- **Outputs**: Resultados agregados y consensuados
+- **Flags**: `--agents [list]`, `--strategy [parallel|sequential]`
+
+### `/nc:swarm [operation] [flags]`
+**Propósito**: Operación distribuida masiva
+- **Scale**: 10+ agentes simultáneos
+- **Use cases**: Refactoring masivo, auditorías
+- **Coordination**: Swarm intelligence
+- **Flags**: `--size [n]`, `--consensus`, `--timeout`
+
+## Comandos de Integración
+
+### `/nc:github [action] [flags]`
+**Propósito**: Integración con GitHub via MCP
+- **MCP Server**: GitHub official
+- **Actions**: PR, issues, workflows, releases
+- **Automation**: CI/CD triggers
+- **Flags**: `--repo`, `--branch`, `--auto-merge`
+
+### `/nc:docker [command] [flags]`
+**Propósito**: Gestión de containers
+- **MCP Server**: Docker
+- **Commands**: build, run, compose, optimize
+- **Features**: Multi-stage, cache optimization
+- **Flags**: `--optimize`, `--security-scan`, `--push`
+
+### `/nc:cloud [provider] [action]`
+**Propósito**: Operaciones cloud multi-provider
+- **Providers**: AWS, GCP, Azure
+- **Actions**: deploy, scale, monitor, cost-optimize
+- **IaC**: Terraform generation
+- **Flags**: `--environment`, `--dry-run`, `--cost-estimate`
 
 ## Meta-Comandos
 

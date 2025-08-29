@@ -1,34 +1,42 @@
-# NubemClaude Framework Core System
+# NubemClaude Framework Core System v2.0
 
-Este es el punto de entrada principal del NubemClaude Framework.
-Sistema unificado que combina lo mejor de múltiples frameworks.
+Sistema empresarial unificado con IA predictiva, seguridad proactiva y compatibilidad universal.
+Combina lo mejor de 35+ frameworks analizados con innovaciones únicas.
 
-## Sistema de Carga Modular
+## Sistema de Carga Modular v2.0
 
-@PRINCIPLES.md
-@COMMANDS.md
-@PERSONAS.md
-@MCP.md
-@RAG.md
-@ORCHESTRATOR.md
-@RULES.md
-@MODES.md
+@PRINCIPLES.md    # Principios fundamentales
+@COMMANDS.md      # 30+ comandos con IA predictiva
+@PERSONAS.md      # 15 personas especializadas
+@SECURITY.md      # Security Engine proactivo
+@MCP.md          # Protocol universal para LLMs
+@RAG.md          # Sistema RAG empresarial
+@RULES.md        # Reglas universales multi-IDE
+@ORCHESTRATOR.md # Coordinación multi-agente
+@MODES.md        # Modos de operación
 
-## Configuración Activa
+## Configuración Activa v2.0
 
-- **Versión**: 1.0.0
-- **Perfil**: Complete
-- **RAG**: Habilitado
-- **MCP**: Todos los servidores activos
-- **Personas**: Auto-activación habilitada
-- **Wave System**: Habilitado para operaciones complejas
+- **Versión**: 2.0.0
+- **Perfil**: Enterprise
+- **RAG**: Qdrant + PostgreSQL/pgvector
+- **MCP**: Protocol universal habilitado
+- **Security**: Engine proactivo activo
+- **Personas**: Auto-activación contextual
+- **Wave System**: Orquestación multi-etapa
+- **Predictive**: Analytics ML habilitado
+- **Docker**: Environment containerizado
+- **CI/CD**: GitHub Actions integrado
 
-## Directiva Principal
+## Directiva Principal v2.0
 
-"Combinar memoria persistente con expertise profesional para soluciones óptimas"
+"Desarrollo predictivo con seguridad proactiva y compatibilidad universal"
 
-- Usar RAG para contexto histórico relevante
-- Aplicar mejores prácticas via personas especializadas
-- Optimizar tokens manteniendo calidad
-- Priorizar evidencia sobre suposiciones
-- Mantener consistencia entre sesiones
+- Predecir y prevenir issues antes de que ocurran
+- Aplicar seguridad by design en cada línea
+- Mantener compatibilidad con todos los LLMs/IDEs
+- Usar memoria vectorial para contexto histórico
+- Coordinar múltiples agentes para tareas complejas
+- Optimizar continuamente basado en métricas
+- Garantizar compliance automático (OWASP, GDPR)
+- Dockerizar todo para reproducibilidad total

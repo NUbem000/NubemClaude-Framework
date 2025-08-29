@@ -1,0 +1,181 @@
+version: '3.9'
+
+services:
+  # Main NubemClaude Framework container
+  nubemclaude:
+    build:
+      context: .
+      target: development
+    container_name: nubemclaude-framework
+    image: nubemclaude:latest
+    volumes:
+      - ./:/workspace
+      - ~/.claude:/home/nubemclaude/.claude
+      - ~/.nubemclaude:/home/nubemclaude/.nubemclaude
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - PYTHONPATH=/app
+      - NODE_ENV=development
+      - CLAUDE_API_KEY=${CLAUDE_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - BRAVE_API_KEY=${BRAVE_API_KEY}
+      - DATABASE_URL=postgresql://nubemclaude:password@postgres:5432/nubemclaude
+      - REDIS_URL=redis://redis:6379
+      - QDRANT_URL=http://qdrant:6333
+    ports:
+      - "8080:8080"
+      - "8888:8888"
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+      - qdrant
+    networks:
+      - nubemclaude-network
+    stdin_open: true
+    tty: true
+
+  # PostgreSQL with pgvector for RAG
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: nubemclaude-postgres
+    environment:
+      - POSTGRES_USER=nubemclaude
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=nubemclaude
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - nubemclaude-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nubemclaude"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching and queues
+  redis:
+    image: redis:7-alpine
+    container_name: nubemclaude-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - nubemclaude-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Qdrant vector database for RAG
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: nubemclaude-qdrant
+    volumes:
+      - qdrant-data:/qdrant/storage
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    networks:
+      - nubemclaude-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Grafana for monitoring (optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: nubemclaude-grafana
+    profiles: ["monitoring"]
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=redis-datasource
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    ports:
+      - "3001:3000"
+    networks:
+      - nubemclaude-network
+    depends_on:
+      - prometheus
+
+  # Prometheus for metrics
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: nubemclaude-prometheus
+    profiles: ["monitoring"]
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+    networks:
+      - nubemclaude-network
+
+  # Jupyter Lab for experiments
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    container_name: nubemclaude-jupyter
+    profiles: ["research"]
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=nubemclaude
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - jupyter-data:/home/jovyan
+    ports:
+      - "8889:8888"
+    networks:
+      - nubemclaude-network
+
+  # MinIO for object storage (optional)
+  minio:
+    image: minio/minio:latest
+    container_name: nubemclaude-minio
+    profiles: ["storage"]
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - nubemclaude-network
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  nubemclaude-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  qdrant-data:
+  grafana-data:
+  prometheus-data:
+  jupyter-data:
+  minio-data:
