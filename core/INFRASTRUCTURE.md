@@ -92,6 +92,31 @@ activation_triggers:
 - Certificaciones necesarias
 - Timeline legalización
 
+### `/nc:analyze-certification [file] [type]`
+**Propósito**: Análisis e interpretación de certificaciones de cableado
+```bash
+/nc:analyze-certification fluke_report.pdf --type copper
+/nc:analyze-certification otdr_trace.sor --type fiber
+```
+**Outputs**:
+- Interpretación de parámetros
+- Identificación de problemas
+- Márgenes de seguridad
+- Recomendaciones de mejora
+- Predicción de vida útil
+
+### `/nc:diagnose-cable [symptoms] [infrastructure]`
+**Propósito**: Diagnóstico inteligente de problemas de cableado
+```bash
+/nc:diagnose-cable "intermittent connection" --infrastructure cat6a
+/nc:diagnose-cable "high packet loss" --test-results certification.pdf
+```
+**Outputs**:
+- Causa raíz probable
+- Tests adicionales recomendados
+- Soluciones paso a paso
+- Impacto en servicios
+
 ## 🏨 Casos de Uso: Hotel 200 habitaciones
 
 ### Diseño Completo de Infraestructura
